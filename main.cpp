@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
     MainWindow wa;
     //testing shit
-    wa.socket = cTest.Connect("jsonplaceholder.typicode.com", 80, &wa);
+    wa.socket = cTest.Connect("localhost", 8000, &wa);
 
     //QString text =  "{ \"message\": \"hellouuu\", \"author\":\"andruha\", \"time\":\"13:77\"}";
     //sleep(1);

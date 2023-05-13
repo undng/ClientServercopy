@@ -15,7 +15,7 @@ SocketTest::SocketTest(QObject *parent) :
 void SocketTest::work(){
 
         QByteArray bytesmes = socket->readAll();
-
+        qDebug() << "readed";
         QJsonObject obj = this->ObjectFromString(QString(bytesmes), socket);
         this->SetLabel(&obj, wa);
 
@@ -32,12 +32,12 @@ QTcpSocket* SocketTest::Connect(QString host, int port, MainWindow* w)
             qDebug() << "Connected!";
 
             // send
-            socket->write("hello server");
-            socket->waitForBytesWritten(1000);
-            socket->waitForReadyRead(3000);
-            qDebug() << "Reading: " << socket->bytesAvailable();
+            //socket->write("hello server");
+            //socket->waitForBytesWritten(1000);
+            //socket->waitForReadyRead(3000);
+            //qDebug() << "Reading: " << socket->bytesAvailable();
 
-            qDebug() << socket->readAll();
+            //qDebug() << socket->readAll();
 
 
         }
@@ -69,6 +69,7 @@ QJsonObject SocketTest::ObjectFromString(const QString& in, QTcpSocket* socket)
     else
     {
         qDebug() << "Invalid JSON...\n" << in << Qt::endl;
+
     }
 
     return obj;
@@ -76,8 +77,10 @@ QJsonObject SocketTest::ObjectFromString(const QString& in, QTcpSocket* socket)
 
 void SocketTest::SetLabel(QJsonObject *data, MainWindow *w){
 
-    QString strdata = (*data)["message"].toString();
-    QLabel* newlabel = new QLabel(strdata, w);
+    QString message = (*data)["message"].toString();
+    QString author = (*data)["author"].toString();
+    QString time = (*data)["time"].toString();
+    QLabel* newlabel = new QLabel(message + " " + author + " " + time, w);
     //newlabel->setText(strdata)
     newlabel->setStyleSheet("color: #61dafb;");
     w->ui->verticalLayout->addWidget(newlabel);
