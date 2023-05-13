@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    socket->close();
+    qDebug() << socket->isOpen();
 }
 
 
@@ -23,8 +25,10 @@ void MainWindow::on_sendButton_clicked()
     QString text = ui->textLine->text();
     QString author = ui->textLine2->text();
     QDateTime time = QDateTime::currentDateTime();
-    //string sendmessage = text + author + time;
-    //socket->wr
-    //*under contruction*
+    QString sendmessage = text + author + time.toString();
+    QByteArray temp = sendmessage.toLocal8Bit();
+    char* ms = temp.data();
+    socket->write(ms);
+
 }
 

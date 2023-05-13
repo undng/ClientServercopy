@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include<QVBoxLayout>
+#include <QTcpSocket>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,6 +18,10 @@ public:
     ~MainWindow();
     Ui::MainWindow *ui;
     //QVBoxLayout* testVbox;
+    QTcpSocket* socket;
+
+private slots:
+    void on_sendButton_clicked();
 
 private:
 

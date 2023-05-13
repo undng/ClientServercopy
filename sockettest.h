@@ -13,15 +13,18 @@ class SocketTest : public QObject
 public:
     explicit SocketTest(QObject *parent = 0);
     QTcpSocket* socket;
-    void Connect(QString host, int port);
+    QTcpSocket* Connect(QString host, int port, MainWindow* w);
     ~SocketTest();
     void tcp_ready_read();
     QJsonObject ObjectFromString(const QString& in, QTcpSocket* socket);
     void SetLabel(QJsonObject* data, MainWindow* w);
+    MainWindow* wa;
+
 signals:
     //QJsonObject recieveMessage(QJsonObject obj);
 
 public slots:
+    void work();
 
 private:
 

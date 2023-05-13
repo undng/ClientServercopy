@@ -9,14 +9,24 @@ SocketTest::SocketTest(QObject *parent) :
 {
     socket = new QTcpSocket(this);
     const QString text =  "{ \"message\": \"hello\", \"author\":\"andruha\", \"time\":\"13:77\"}";
-}
+    connect(socket, &QTcpSocket::readyRead, this, &SocketTest::work);
 
-void SocketTest::Connect(QString host, int port)
+}
+void SocketTest::work(){
+
+        QByteArray bytesmes = socket->readAll();
+
+        QJsonObject obj = this->ObjectFromString(QString(bytesmes), socket);
+        this->SetLabel(&obj, wa);
+
+
+}
+QTcpSocket* SocketTest::Connect(QString host, int port, MainWindow* w)
 {
     const QString text =  "{ \"message\": \"hello\", \"author\":\"andruha\", \"time\":\"13:77\"}";
     socket->connectToHost(host, port);
 
-
+    wa = w;
         if(socket->waitForConnected(3000))
         {
             qDebug() << "Connected!";
@@ -29,13 +39,13 @@ void SocketTest::Connect(QString host, int port)
 
             qDebug() << socket->readAll();
 
-            socket->close();
+
         }
         else
         {
             qDebug() << "Not connected!";
         }
-
+        return socket;
 }
 
 QJsonObject SocketTest::ObjectFromString(const QString& in, QTcpSocket* socket)

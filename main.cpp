@@ -3,6 +3,7 @@
 #include <QCoreApplication>
 #include "sockettest.h"
 #include<QJsonObject>
+#include<unistd.h>
 
 
 
@@ -11,50 +12,27 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     SocketTest cTest;
-    const QString text =  "{ \"message\": \"hello\", \"author\":\"andruha\", \"time\":\"13:77\"}";
-    cTest.Connect("jsonplaceholder.typicode.com", 80);
-    QJsonObject testObj = cTest.ObjectFromString(text, cTest.socket);
+
+
+
+
     //cTest.recieveMessage(testObj);
-    qDebug() << testObj;
+    //qDebug() << testObj;
 
     MainWindow wa;
     //testing shit
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
+    wa.socket = cTest.Connect("jsonplaceholder.typicode.com", 80, &wa);
 
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
+    //QString text =  "{ \"message\": \"hellouuu\", \"author\":\"andruha\", \"time\":\"13:77\"}";
+    //sleep(1);
 
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
+    //QJsonObject testObj = cTest.ObjectFromString(text, cTest.socket);
+    //cTest.SetLabel(&testObj, &wa);
 
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
+    //text =  "{ \"message\": \"byebye\", \"author\":\"andruha\", \"time\":\"13:77\"}";
+    //testObj = cTest.ObjectFromString(text, cTest.socket);
+    //cTest.SetLabel(&testObj, &wa);
 
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-    cTest.SetLabel(&testObj, &wa);
-
-    cTest.SetLabel(&testObj, &wa);
     wa.show();
     return a.exec();
 }
